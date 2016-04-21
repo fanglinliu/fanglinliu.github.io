@@ -1,0 +1,23 @@
+It would be great if CMake had an 32/64bit option out of the box. It does not, so you will need to apply one of different compiler or generator dependend methods. E.g.:
+
+GCC (on Linux) and some other compilers, e.g. Sun Studio. Set CFLAGS and CXXFLAGS to include -m32 (32-bit build) or -m64 (64-bit build).
+
+Windows, Visual Studio generator. Use 64 bit generator, e.g.
+
+cmake -G "Visual Studio 10 Win64" path\to\source\dir
+
+to compile 64-bit (x64). Omit "Win64" in generator name, to build for 32 bit
+
+Mac OS X. Use CMAKE_OSX_ARCHITECTURES CMake variable.
+
+cmake -DCMAKE_OSX_ARCHITECTURES=i386 /path/to/source/dir will compile 32 bit build
+
+cmake -DCMAKE_OSX_ARCHITECTURES=x86_64 /path/to/source/dir will compile 64 bit.
+
+cmake "-DCMAKE_OSX_ARCHITECTURES=x86_64;i386" /path/to/source/dir will create 96-bit universal binaries :)
+
+The above is slightly reworded.
+
+http://dev.mysql.com/doc/internals/en/compiling-for-different-hardware-achitectures.html
+
+http://stackoverflow.com/questions/5334095/cmake-multiarchitecture-compilation
